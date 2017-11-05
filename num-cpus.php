@@ -54,5 +54,3 @@ function num_cpus()
 
   return $numCpus;
 }
-
-echo num_cpus().PHP_EOL;
