@@ -22,4 +22,6 @@ for ($i = 0; $i < $num_cpu; $i++) {
   execInBackground('php -q worker.php '.$i);
 }
 
-while (true) {};
+while (true) {
+  sleep(1);
+};
