@@ -6,7 +6,6 @@
  * Time: 17:50
  */
 $index = $argv[1];
-file_put_contents('file-'.$index.'.txt', print_r($argv, true));
 include 'sql.php';
 
 function generateRandomString($length = 10) {
