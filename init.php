@@ -20,7 +20,7 @@ function generateRandomString($length = 10) {
 for ($i = 0; $i < $num_cpu * 1000000; $i++) {
   $integer1 = rand(0, PHP_INT_MAX);
   $integer2 = rand(0, PHP_INT_MAX);
-  $string1 = generateRandomString(10);
-  $string2 = generateRandomString(100);
-  $data = sql("INSERT INTO `values` (`id`, `integer1`, `integer2`, `string1`, `string2`) VALUES (NULL, ".$integer1.", ".$integer2.", '".$string1."', '".$string2."');");
+  $integer3 = rand(0, PHP_INT_MAX);
+  $integer4 = rand(0, PHP_INT_MAX);
+  $data = sql("INSERT INTO `values` (`id`, `integer1`, `integer2`, `integer3`, `integer4`) VALUES (NULL, ".$integer1.", ".$integer2.", ".$integer3.", ".$integer4.");");
 }
