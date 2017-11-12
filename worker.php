@@ -38,14 +38,21 @@ switch ($type) {
       file_put_contents('test-'.$index.'.txt', rand(0, PHP_INT_MAX));
     } while (true);
     break;
-  case 'writes':
-    $string = generateRandomString(100000);
-    file_put_contents('test-'.$index.'.txt', $string);
+  case 'files2':
     do {
-      $handle = fopen('test-'.$index.'.txt', "c");
-      fseek($handle, rand(0, 100000 - 1));
-      fwrite($handle, generateRandomString(1));
-      fclose($handle);
+      file_put_contents('test-'.$index.'.txt', generateRandomString(1));
     } while (true);
+    break;
+  case 'writes':
+    $fileSize = 1024 * 1024;
+    $string = generateRandomString($fileSize);
+    file_put_contents('test-'.$index.'.txt', $string);
+    $handle = fopen('test-'.$index.'.txt', "r+");
+    do {
+      fseek($handle, rand(0, $fileSize - 1));
+      fwrite($handle, generateRandomString(1), 1);
+      fflush($handle);
+    } while (true);
+    fclose($handle);
     break;
 }
