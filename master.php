@@ -14,7 +14,7 @@ function execInBackground($cmd) {
 
 $pids = [];
 for ($i = 0; $i < $num_cpu; $i++) {
-  $pids[$i] = execInBackground('php -q worker.php '.$i);
+  $pids[$i] = execInBackground('php -q worker.php '.$i.' files');
 }
 
 declare(ticks = 1);
