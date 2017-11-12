@@ -13,17 +13,17 @@ if (isset($argv[2])) {
 }
 include 'sql.php';
 
+function generateRandomString($length = 10) {
+  $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  $charactersLength = strlen($characters);
+  $randomString = '';
+  for ($i = 0; $i < $length; $i++) {
+    $randomString .= $characters[rand(0, $charactersLength - 1)];
+  }
+  return $randomString;
+}
 switch ($type) {
   case 'sql':
-    function generateRandomString($length = 10) {
-      $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-      $charactersLength = strlen($characters);
-      $randomString = '';
-      for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
-      }
-      return $randomString;
-    }
     do {
       $id = rand(1, 1000000) + $index * 1000000;
       $integer1 = rand(0, PHP_INT_MAX);
@@ -36,6 +36,16 @@ switch ($type) {
   case 'files':
     do {
       file_put_contents('test-'.$index.'.txt', rand(0, PHP_INT_MAX));
+    } while (true);
+    break;
+  case 'writes':
+    $string = generateRandomString(100000);
+    file_put_contents('test-'.$index.'.txt', $string);
+    do {
+      $handle = fopen('test-'.$index.'.txt', "c");
+      fseek($handle, rand(0, 100000 - 1));
+      fwrite($handle, generateRandomString(1));
+      fclose($handle);
     } while (true);
     break;
 }
