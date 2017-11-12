@@ -42,7 +42,7 @@ switch ($type) {
     $string = generateRandomString(100000);
     file_put_contents('test-'.$index.'.txt', $string);
     do {
-      $handle = fopen('test-'.$index.'.txt', "a");
+      $handle = fopen('test-'.$index.'.txt', "c");
       fseek($handle, rand(0, 100000 - 1));
       fwrite($handle, generateRandomString(1));
       fclose($handle);
